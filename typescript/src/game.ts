@@ -1,16 +1,16 @@
 export class Game {
 
-    private players: Array<string> = [];
+    protected players: Array<string> = [];
     private places: Array<number> = [];
     private purses: Array<number> = [];
     private inPenaltyBox: Array<boolean> = [];
     private currentPlayer: number = 0;
     private isGettingOutOfPenaltyBox: boolean = false;
 
-    private popQuestions: Array<string> = [];
-    private scienceQuestions: Array<string> = [];
-    private sportsQuestions: Array<string> = [];
-    private rockQuestions: Array<string> = [];
+    protected popQuestions: Array<string> = [];
+    protected scienceQuestions: Array<string> = [];
+    protected sportsQuestions: Array<string> = [];
+    protected rockQuestions: Array<string> = [];
 
     constructor() {
 
