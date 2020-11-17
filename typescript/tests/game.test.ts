@@ -30,14 +30,11 @@ describe('The test environment', () => {
         expect(players.length).to.equal(5)
     })
 
-    it("should have 50 questions per category", function (){
-        //given
-
-
-        //when
-
-        //then
-
+    it("should have 50 questions per category when the game starts", function (){
+        expect(game.getPopQuestions().length).to.equal(50)
+        expect(game.getScienceQuestions().length).to.equal(50)
+        expect(game.getSportsQuestions().length).to.equal(50)
+        expect(game.getRockQuestions().length).to.equal(50)
     })
 
 });
@@ -45,5 +42,21 @@ describe('The test environment', () => {
 class GameTest extends Game {
     public getPlayers():Array<string> {
         return this.players
+    }
+
+    public getPopQuestions(): Array<string> {
+        return this.popQuestions
+    }
+
+    public getScienceQuestions(): Array<string> {
+        return this.scienceQuestions
+    }
+
+    public getSportsQuestions(): Array<string> {
+        return this.sportsQuestions
+    }
+
+    public getRockQuestions(): Array<string> {
+        return this.rockQuestions
     }
 }
