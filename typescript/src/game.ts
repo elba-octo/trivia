@@ -112,8 +112,8 @@ export class Game {
     return "Rock";
   }
 
-  private didPlayerWin(): boolean {
-    return !(this.purses[this.currentPlayer] == 6);
+  private isWinner(): boolean {
+    return (this.purses[this.currentPlayer] === 6);
   }
 
   public wrongAnswer(): boolean {
@@ -140,7 +140,7 @@ export class Game {
             " Gold Coins."
         );
 
-        var winner = this.didPlayerWin();
+        var winner = this.isWinner();
         this.currentPlayer += 1;
         if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
 
@@ -161,7 +161,7 @@ export class Game {
           " Gold Coins."
       );
 
-      var winner = this.didPlayerWin();
+      var winner = this.isWinner();
 
       this.currentPlayer += 1;
       if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
