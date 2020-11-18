@@ -191,6 +191,36 @@ describe("The test environment", () => {
         expect(game.getPlaces()[0]).to.equal(10);
         expect(game.currentCategory()).to.equal("Sports");
       })
+
+      it("should return rock category when dice is 3", function() {
+        //When
+        game.add("Amelle");
+        game.roll(3);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(3);
+        expect(game.currentCategory()).to.equal("Rock");
+      })
+
+      it("should return rock category when dice is 7", function() {
+        //When
+        game.add("Amelle");
+        game.roll(7);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(7);
+        expect(game.currentCategory()).to.equal("Rock");
+      });
+
+      it("should return rock category when dice is 11", function() {
+        //When
+        game.add("Amelle");
+        game.roll(11);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(11);
+        expect(game.currentCategory()).to.equal("Rock");
+      });
     });
   });
 });
