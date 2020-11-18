@@ -149,6 +149,49 @@ describe("The test environment", () => {
         expect(isNotWinner).to.be.false;
       });
     });
+
+    describe("wrongAnswer", () => {
+      it("should send the player to the penalty box", function() {
+        //When
+        game.add("Amelle");
+        const isLoser = game.wrongAnswer();
+
+        //Then
+        expect(game.getInPenaltyBox()[0]).to.be.true;
+        expect(isLoser).to.be.true;
+      });
+    });
+
+    describe("currentCategory", () => {
+      it("should return sports category when dice is 2", function() {
+        //When
+        game.add("Amelle");
+        game.roll(2);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(2);
+        expect(game.currentCategory()).to.equal("Sports");
+      })
+
+      it("should return sports category when dice is 6", function() {
+        //When
+        game.add("Amelle");
+        game.roll(6);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(6);
+        expect(game.currentCategory()).to.equal("Sports");
+      })
+      it("should return sports category when dice is 10", function() {
+        //When
+        game.add("Amelle");
+        game.roll(10);
+
+        //Then
+        expect(game.getPlaces()[0]).to.equal(10);
+        expect(game.currentCategory()).to.equal("Sports");
+      })
+    });
   });
 });
 
@@ -188,4 +231,8 @@ class GameTest extends Game {
   public getIsGettingOutOfPenaltyBox(): boolean {
     return this.isGettingOutOfPenaltyBox;
   }
+
+  public  currentCategory(): string {
+   return super.currentCategory();
+ }
 }
