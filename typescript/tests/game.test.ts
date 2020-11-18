@@ -1,12 +1,14 @@
 import {expect} from "chai";
 import {describe, it, beforeEach} from "mocha";
 import {Game} from "../src/game";
+import { Player } from "../src/player";
 
 let game: GameTest;
+let player: Player;
 describe("The test environment", () => {
     beforeEach(() => {
         game = new GameTest();
-        game.addAndInitializePlayers("Amelle");
+        player = game.addAndInitializePlayers("Amelle");
     });
 
     describe("game constructor", () => {
@@ -34,9 +36,9 @@ describe("The test environment", () => {
 
         it("should add a player with correct settings", () => {
             // Then
-            expect(game.getPlaces()[0]).to.equal(0);
-            expect(game.getPurses()[0]).to.equal(0);
-            expect(game.getInPenaltyBox()[0]).to.be.false;
+            expect(player.place).to.equal(0);
+            expect(player.purse).to.equal(0);
+            expect(player.inPenaltyBox).to.be.false;
         });
     })
 
@@ -45,14 +47,14 @@ describe("The test environment", () => {
             // When
             game.roll(5);
             // Then
-            expect(game.getPlaces()[0]).to.equal(5);
+            expect(player.place).to.equal(5);
         });
 
         it("should not update the place of the player when dices value 12", () => {
             // When
             game.roll(12);
             // Then
-            expect(game.getPlaces()[0]).to.equal(0);
+            expect(player.place).to.equal(0);
         });
 
         describe("when the player is in the penalty box", () => {
@@ -63,23 +65,23 @@ describe("The test environment", () => {
                 // When
                 game.roll(5);
                 // Then
-                expect(game.getIsGettingOutOfPenaltyBox()).to.be.true;
-                expect(game.getPlaces()[0]).to.equal(5);
+                expect(player.isGettingOutOfPenaltyBox).to.be.true;
+                expect(player.place).to.equal(5);
             });
             it("should reset the place of the player and not get him out of the penalty box", () => {
                 // When
                 game.roll(5);
                 game.roll(7);
                 // Then
-                expect(game.getIsGettingOutOfPenaltyBox()).to.be.true;
-                expect(game.getPlaces()[0]).to.equal(0);
+                expect(player.isGettingOutOfPenaltyBox).to.be.true;
+                expect(player.place).to.equal(0);
             });
             it("should not update the place of the player and get him out of the penalty box", () => {
                 // When
                 game.roll(6);
                 // Then
-                expect(game.getIsGettingOutOfPenaltyBox()).to.be.false;
-                expect(game.getPlaces()[0]).to.equal(0);
+                expect(player.isGettingOutOfPenaltyBox).to.be.false;
+                expect(player.place).to.equal(0);
             });
         });
     })
@@ -94,7 +96,7 @@ describe("The test environment", () => {
                 game.roll(5);
                 const isWinner = game.wasCorrectlyAnswered();
                 // Then
-                expect(game.getPurses()[0]).to.be.equal(1);
+                expect(player.purse).to.be.equal(1);
                 expect(isWinner).to.be.false;
             });
             it("should return player as winner when he has 6 gold coins", () => {
@@ -107,7 +109,7 @@ describe("The test environment", () => {
                 game.wasCorrectlyAnswered();
                 const isWinner = game.wasCorrectlyAnswered();
                 // Then
-                expect(game.getPurses()[0]).to.be.equal(6);
+                expect(player.purse).to.be.equal(6);
                 expect(isWinner).to.be.true;
             });
             it("should not update player purse when isGettingOutOfPenaltyBox is false", () => {
@@ -115,7 +117,7 @@ describe("The test environment", () => {
                 game.roll(6);
                 const isNotWinner = game.wasCorrectlyAnswered();
                 // Then
-                expect(game.getPurses()[0]).to.be.equal(0);
+                expect(player.purse).to.be.equal(0);
                 expect(isNotWinner).to.be.true;
             })
         });
@@ -125,7 +127,7 @@ describe("The test environment", () => {
                 game.roll(5);
                 const isWinner = game.wasCorrectlyAnswered();
                 // Then
-                expect(game.getPurses()[0]).to.be.equal(1);
+                expect(player.purse).to.be.equal(1);
                 expect(isWinner).to.be.false;
             });
             it("should return player as winner when he has 6 gold coins", () => {
@@ -139,7 +141,7 @@ describe("The test environment", () => {
                 game.wasCorrectlyAnswered();
                 const isWinner = game.wasCorrectlyAnswered();
                 // Then
-                expect(game.getPurses()[0]).to.be.equal(6);
+                expect(player.purse).to.be.equal(6);
                 expect(isWinner).to.be.true;
             });
         });
@@ -150,7 +152,7 @@ describe("The test environment", () => {
                 const isLoser = game.wrongAnswer();
 
                 //Then
-                expect(game.getInPenaltyBox()[0]).to.be.true;
+                expect(player.inPenaltyBox).to.be.true;
                 expect(isLoser).to.be.true;
             });
         });
@@ -161,7 +163,7 @@ describe("The test environment", () => {
                 game.roll(2);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(2);
+                expect(player.place).to.equal(2);
                 expect(game.currentCategory()).to.equal("Sports");
             })
 
@@ -170,7 +172,7 @@ describe("The test environment", () => {
                 game.roll(6);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(6);
+                expect(player.place).to.equal(6);
                 expect(game.currentCategory()).to.equal("Sports");
             })
             it("should return sports category when dice is 10", function () {
@@ -178,7 +180,7 @@ describe("The test environment", () => {
                 game.roll(10);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(10);
+                expect(player.place).to.equal(10);
                 expect(game.currentCategory()).to.equal("Sports");
             })
 
@@ -187,7 +189,7 @@ describe("The test environment", () => {
                 game.roll(3);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(3);
+                expect(player.place).to.equal(3);
                 expect(game.currentCategory()).to.equal("Rock");
             })
 
@@ -196,7 +198,7 @@ describe("The test environment", () => {
                 game.roll(7);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(7);
+                expect(player.place).to.equal(7);
                 expect(game.currentCategory()).to.equal("Rock");
             });
 
@@ -205,7 +207,7 @@ describe("The test environment", () => {
                 game.roll(11);
 
                 //Then
-                expect(game.getPlaces()[0]).to.equal(11);
+                expect(player.place).to.equal(11);
                 expect(game.currentCategory()).to.equal("Rock");
             });
         });
@@ -213,7 +215,7 @@ describe("The test environment", () => {
 });
 
 class GameTest extends Game {
-    public getPlayers(): Array<string> {
+    public getPlayers(): Array<Player> {
         return this.players;
     }
 
@@ -231,22 +233,6 @@ class GameTest extends Game {
 
     public getRockQuestions(): Array<string> {
         return this.rockQuestions;
-    }
-
-    public getPlaces(): Array<number> {
-        return this.places;
-    }
-
-    public getPurses(): Array<number> {
-        return this.purses;
-    }
-
-    public getInPenaltyBox(): Array<boolean> {
-        return this.inPenaltyBox;
-    }
-
-    public getIsGettingOutOfPenaltyBox(): boolean {
-        return this.isGettingOutOfPenaltyBox;
     }
 
     public currentCategory(): string {
