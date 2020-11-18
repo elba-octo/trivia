@@ -4,7 +4,7 @@ export class Game {
   protected purses: Array<number> = [];
   protected inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
-  private isGettingOutOfPenaltyBox: boolean = false;
+  protected isGettingOutOfPenaltyBox: boolean = false;
 
   protected popQuestions: Array<string> = [];
   protected scienceQuestions: Array<string> = [];
