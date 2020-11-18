@@ -3,9 +3,9 @@ import { Game } from "./game";
 export class GameRunner {
   public static main(): void {
     const game = new Game();
-    game.add("Chet");
-    game.add("Pat");
-    game.add("Sue");
+    game.addAndInitializePlayers("Chet");
+    game.addAndInitializePlayers("Pat");
+    game.addAndInitializePlayers("Sue");
 
     let notAWinner;
     do {

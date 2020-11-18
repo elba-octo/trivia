@@ -6,7 +6,7 @@ let game: GameTest;
 describe("The test environment", () => {
     beforeEach(() => {
         game = new GameTest();
-        game.add("Amelle");
+        game.addAndInitializePlayers("Amelle");
     });
 
     describe("game constructor", () => {
@@ -21,10 +21,10 @@ describe("The test environment", () => {
     describe("add players", () => {
         it("should have players in a game", function () {
             //given
-            game.add("Sandra");
-            game.add("Weslay");
-            game.add("Matthieu");
-            game.add("Caroline");
+            game.addAndInitializePlayers("Sandra");
+            game.addAndInitializePlayers("Weslay");
+            game.addAndInitializePlayers("Matthieu");
+            game.addAndInitializePlayers("Caroline");
 
             //when
             const players = game.getPlayers();
